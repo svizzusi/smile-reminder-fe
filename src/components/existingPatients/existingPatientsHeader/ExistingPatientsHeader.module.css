@@ -1,0 +1,71 @@
+.existingPatientsTableHeader {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.existingPatientsTableRowHeader {
+    background: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.existingPatientsTableRowHeader th{
+    width: fit-content;
+    padding: 12px 15px;
+    font-size: 1.6rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 10px solid var(--tan);
+}
+
+@media screen and (max-width: 1000px) {
+    
+    .existingPatientsTableRowHeader th{
+        padding: 12px 15px;
+        font-size: 1rem;
+        border: 5px solid var(--tan);
+    }
+}
+
+@media screen and (max-width: 792px) {
+    
+    .existingPatientsTableRowHeader th{
+        padding: 8px 10px;
+        font-size: 1rem;
+        border: 5px solid var(--tan);
+    }
+}
+
+@media screen and (max-width: 684px) {
+    
+    .existingPatientsTableRowHeader th{
+        padding: 3px 6px;
+        font-size: .8rem;
+        border: 3px solid var(--tan);
+    }
+}
+
+@media screen and (max-width: 544px) {
+    
+    .existingPatientsTableRowHeader th{
+        padding: 3px 5px;
+        font-size: .7rem;
+        border: 2px solid var(--tan);
+    }
+}
+@media screen and (max-width: 444px) {
+    
+    .existingPatientsTableRowHeader th{
+        padding: 2px 4px;
+        font-size: .6rem;
+        border: 2px solid var(--tan);
+    }
+}
+@media screen and (max-width: 387px) {
+    
+    .existingPatientsTableRowHeader th{
+        padding: 2px 3px;
+        font-size: .5rem;
+        border: 2px solid var(--tan);
+    }
+}

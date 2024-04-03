@@ -1,0 +1,111 @@
+.existingPatientsTableBody {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.existingPatientsTableRowCard {
+    background: var(--red);
+}
+
+.existingPatientsTableRowCard td{
+    width: fit-content;
+    padding: 12px 15px;
+    background: white;
+    font-size: 1.6rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 10px solid var(--red);
+}
+
+.existingPatientsTableRowCard td:nth-child(5), td:nth-child(6) {
+    cursor: pointer;
+}
+
+.existingPatientsTableRowCard td:nth-child(5) {
+    background: var(--tan);
+}
+
+.existingPatientsTableRowCard td:nth-child(6) {
+    background: var(--rustmist);
+}
+
+.existingPatientsEditBtn, .existingPatientsDeleteBtn {
+    font-size: 2.2rem;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.existingPatientsEditBtn:hover {
+    color: var(--teal);
+}
+
+.existingPatientsDeleteBtn:hover {
+    color: var(--tan);
+}
+
+
+@media screen and (max-width: 1000px) {
+    
+    .existingPatientsTableRowCard td{
+        padding: 12px 15px;
+        font-size: 1rem;
+        border: 5px solid var(--red);
+    }
+}
+
+@media screen and (max-width: 792px) {
+    
+    .existingPatientsTableRowCard td{
+        padding: 8px 10px;
+        font-size: 1rem;
+        border: 5px solid var(--red);
+    }
+    
+    .existingPatientsButtons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .existingPatientsBtns {
+        width: 150px;
+        padding: 10px 12px;
+    }
+
+    .existingPatientsEditBtn, .existingPatientsDeleteBtn {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 684px) {
+    
+    .existingPatientsTableRowCard td{
+        padding: 3px 6px;
+        font-size: .8rem;
+        border: 3px solid var(--red);
+    }
+}
+
+@media screen and (max-width: 544px) {
+    
+    .existingPatientsTableRowCard td{
+        padding: 3px 5px;
+        font-size: .7rem;
+        border: 2px solid var(--red);
+    }
+}
+@media screen and (max-width: 444px) {
+    
+    .existingPatientsTableRowCard td{
+        padding: 2px 4px;
+        font-size: .6rem;
+        border: 2px solid var(--red);
+    }
+}
+@media screen and (max-width: 387px) {
+    
+    .existingPatientsTableRowCard td{
+        padding: 2px 3px;
+        font-size: .5rem;
+        border: 2px solid var(--red);
+    }
+}
