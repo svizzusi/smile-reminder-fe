@@ -1,6 +1,6 @@
 import style from './ExistingPatientsDashboard.module.css'
 import  ExistingPatientsSearch from '../existingPatientsSearch/ExistingPatientsSearch';
-import ExistingPatientsCard from '../existingPatientsCard/ExistingPatientsCard'
+import ExistingPatients from '../existingPatients/ExistingPatients'
 const ExistingPatientsDashboard = () => {
 
   return (
@@ -10,7 +10,7 @@ const ExistingPatientsDashboard = () => {
           <ExistingPatientsSearch />
         </section>
         <section className={style.existingPatients}>
-          <ExistingPatientsCard />
+          <ExistingPatients />
         </section>
       </section>
     </>
