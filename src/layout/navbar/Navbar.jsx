@@ -3,7 +3,7 @@ import style from './Navbar.module.css'
 import { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({setShowLogin, setShowSignup}) => {
   const [navExpanded, setNavExpanded] = useState(false)
     const navigate = useNavigate()
 
@@ -27,8 +27,8 @@ const Navbar = () => {
           <li>
             <span
               onClick={() => { 
-                  // setShowLogin(true), 
-                  // setShowSignup(false), 
+                  setShowLogin(true), 
+                  setShowSignup(false), 
                   closeNav() 
                 }}
             >Login</span>
@@ -36,8 +36,8 @@ const Navbar = () => {
           <li>
             <span
               onClick={() => { 
-                // setShowSignup(true), 
-                // setShowLogin(false), 
+                setShowSignup(true), 
+                setShowLogin(false), 
                 closeNav() 
               }}
             >SignUp</span>
@@ -45,16 +45,16 @@ const Navbar = () => {
           <li>
             <span
               onClick={() => { 
-                closeNav(),
-                navigate('/') 
+                navigate('/'), 
+                closeNav()
             }}
             >Home</span>
           </li>
           <li>
             <span
               onClick={() => { 
-                // setShowSignup(false), 
-                // setShowLogin(false),
+                setShowSignup(false), 
+                setShowLogin(false),
                 // setUser(false),
                 // window.sessionStorage.removeItem('userName');, // Clear user name
                 // window.sessionStorage.removeItem('userId');, // Clear user ID

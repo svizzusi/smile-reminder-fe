@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import style from './Footer.module.css'
-// import {FaXTwitter} from "react-icons/fa6";
-// import {FaLinkedinIn} from 'react-icons/fa';
+import {FaXTwitter} from "react-icons/fa6";
+import {FaLinkedinIn} from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -14,7 +14,7 @@ const Footer = () => {
           <Link to={'/privacy-page'}>Privacy Policy</Link>
         </div>
         <div className={style.footerSocials}>
-          {/* <a 
+          <a 
             href='https://twitter.com/StephenVizzusi' 
             target="_blank">
               <FaXTwitter className={style.footerSocialsLinks}/>
@@ -23,7 +23,7 @@ const Footer = () => {
             href='https://www.linkedin.com/in/stephen-vizzusi/' 
             target="_blank">
               <FaLinkedinIn className={style.footerSocialsLinks}/>
-          </a> */}
+          </a>
         </div>
       </footer>
     </div>
