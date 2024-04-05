@@ -21,7 +21,7 @@ const Terms = () => {
             Use the Service to engage in any form of harassment, spamming, or other unethical behavior.
             Attempt to gain unauthorized access to the Service or its related systems or networks.</p>
             <span className={style.termsSectiontextSpan}>5. Privacy</span>
-            <p>Your use of the Service is governed by our Privacy Policy, which can be found at [link to Privacy Policy]. By using the Service, you consent to the collection and use of your personal information as described in the Privacy Policy.</p>
+            <p>Your use of the Service is governed by our Privacy Policy, which can be found at smilesupply.net/privacy-page. By using the Service, you consent to the collection and use of your personal information as described in the Privacy Policy.</p>
             <span className={style.termsSectiontextSpan}>6. Termination</span>
             <p>6.1. Smile Supply may terminate your access to the Service at any time, with or without cause, and without notice.</p>
             <p>6.2. You may terminate your account by discontinuing use of the Service.</p>
