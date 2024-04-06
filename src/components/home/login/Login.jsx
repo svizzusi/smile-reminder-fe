@@ -40,6 +40,7 @@ const Login = ({setShowLogin}) => {
       console.log(res)
     } catch (err) {
       console.log(err)
+      setLoading(false);
     }
   }
 
