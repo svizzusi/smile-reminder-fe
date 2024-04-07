@@ -9,7 +9,6 @@
 .userProfileTopSection {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 40px;
@@ -34,4 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+    .userProfileTopSection {
+        flex-wrap: wrap;
+    }
+    
 }
