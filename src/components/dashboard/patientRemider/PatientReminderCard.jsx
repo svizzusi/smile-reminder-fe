@@ -39,7 +39,7 @@ const PatientReminderCard = ({setShowEditPatient}) => {
   //   }
   // };
 
-  // const reminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), 4)), 'y-MM-dd')
+  // const reminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), formData.frequency * 4)), 'y-MM-dd')
 
   return (
     <tbody className={style.patientReminderTableBody}>

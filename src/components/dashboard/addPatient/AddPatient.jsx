@@ -30,7 +30,7 @@ const AddPatient = ({setShowAddPatient}) => {
     }
 
     // const currentWeek = format(startOfWeek(new Date(), { weekStartsOn: 0 }), 'y-MM-dd')
-    // const patientReminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), Number(formData.frequency))), 'y-MM-dd')
+    // const patientReminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), Number(formData.frequency * 4))), 'y-MM-dd')
 
     const handleSubmit = async (e) => {
         e.preventDefault()

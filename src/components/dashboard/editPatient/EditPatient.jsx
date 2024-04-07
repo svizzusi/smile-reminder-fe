@@ -51,7 +51,7 @@ const EditPatient = ({setShowEditPatient}) => {
         const handleUpdate = async (e) => {
             e.preventDefault()
             // const parsedDate = parseISO(formData.currentWeek);
-            // const patientReminderDay = format(startOfWeek(addWeeks(parsedDate, formData.frequency)), 'y-MM-dd')
+            // const patientReminderDay = format(startOfWeek(addWeeks(parsedDate, Number(formData.frequency * 4))), 'y-MM-dd')
             const lastName = formData.lastName
             const firstName = formData.firstName
             const phone = formData.phone
