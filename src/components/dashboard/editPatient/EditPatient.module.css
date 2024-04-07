@@ -1,0 +1,134 @@
+.editPatientFormSection {
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(5px) saturate(88%);
+    -webkit-backdrop-filter: blur(5px) saturate(88%);
+    background-color: rgba(17, 25, 40, 0.38);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.editPatientFormIconContainer {
+    width: 400px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editPatientFormIcon {
+    font-size: 3.4rem;
+    color: var(--grayblue);
+    cursor: pointer;
+}
+
+.editPatientFormIcon:hover {
+    color: var(--red);
+}
+
+.editPatientForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: var(--teal);
+    width: 400px;
+    height: fit-content;
+    border-radius: var(--borderRadius);
+    top: 200px;  
+    padding-bottom: 50px;
+}
+
+.editPatientFormImage {
+    width: 100px;
+    padding: 30px 0;
+}
+
+.editPatientFormInputs {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.editPatientInput {
+    width: 350px;
+    padding: 10px 16px;
+    outline: none;
+    border: none;
+    border-radius: var(--borderRadius);
+}
+
+.frequecyToggleContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.frequencyToggleOn {
+    font-size: 2.8rem;
+    color: var(--tan);
+}
+
+.frequencyToggleOff {
+    font-size: 2.8rem;
+    color: var(--red);
+}
+
+.editPatientSubmit {
+    width: 200px;
+    padding: 10px 16px;
+    outline: none;
+    border: none;
+    border-radius: var(--borderRadius);
+    background: var(--tan);
+    color: black;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.editPatientSubmit:hover {
+    background: var(--red);
+    color: var(--teal);
+}
+
+@media screen and (max-width: 768px) {
+    
+    .editPatientFormIconContainer {
+        width: 300px;
+    }
+    
+    .editPatientFormIcon {
+        font-size: 2.4rem;
+    }
+    
+    .editPatientForm {
+        gap: 10px;
+        width: 300px;
+    }
+    
+    .editPatientFormImage {
+        width: 60px;
+        padding: 20px 0;
+    }
+    
+    .editPatientFormInputs {
+        padding: 6px;
+        gap: 6px;
+    }
+    
+    .editPatientInput {
+        width: 250px;
+        padding: 6px 10px;
+    }
+    
+    .editPatientSubmit {
+        width: 150px;
+        padding: 6px 10px;
+    }
+}

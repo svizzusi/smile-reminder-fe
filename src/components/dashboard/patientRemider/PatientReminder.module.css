@@ -1,0 +1,187 @@
+.patientReminderSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 30px 25px 50px 25px;
+    width: 100%;
+}
+
+.patientReminderHeading {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.patientReminderTable {
+    width: 100%;
+    margin: 20px;
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+
+.patientReminderTableHeader {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.patientReminderTableBody {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.patientReminderTableRowHeader {
+    background: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.patientReminderTableRowHeader th{
+    width: fit-content;
+    padding: 12px 15px;
+    font-size: 1.6rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 10px solid var(--tan);
+}
+
+.patientReminderTableRowCard {
+    background: var(--red);
+}
+
+.patientReminderTableRowCard td{
+    width: fit-content;
+    padding: 12px 15px;
+    background: white;
+    font-size: 1.6rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 10px solid var(--red);
+}
+
+.patientReminderTableRowCard td:nth-child(6), td:nth-child(7) {
+    cursor: pointer;
+}
+
+.patientReminderTableRowCard td:nth-child(6) {
+    background: var(--tan);
+}
+
+.patientReminderTableRowCard td:nth-child(7) {
+    background: var(--rustmist);
+}
+
+.patientReminderEditBtn, .patientReminderDeleteBtn {
+    font-size: 2.2rem;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.patientReminderEditBtn:hover {
+    color: var(--teal);
+}
+
+.patientReminderDeleteBtn:hover {
+    color: var(--tan);
+}
+
+.patientReminderCartBtn:hover {
+    color: var(--red);
+}
+
+@media screen and (max-width: 1000px) {
+    
+    .patientReminderTableRowHeader th{
+        padding: 12px 15px;
+        font-size: 1rem;
+        border: 5px solid var(--tan);
+    }
+    
+    .patientReminderTableRowCard td{
+        padding: 12px 15px;
+        font-size: 1rem;
+        border: 5px solid var(--red);
+    }
+}
+
+@media screen and (max-width: 792px) {
+    .patientReminderParagraph {
+        font-size: 1rem;
+        line-height: 1.2rem;
+    }
+    
+    .patientReminderTableRowHeader th{
+        padding: 8px 10px;
+        font-size: 1rem;
+        border: 5px solid var(--tan);
+    }
+    
+    .patientReminderTableRowCard td{
+        padding: 8px 10px;
+        font-size: 1rem;
+        border: 5px solid var(--red);
+    }
+    .patientReminderTotal h3{
+        padding: 10px 13px;
+        font-size: 1.2rem;
+        border: 8px solid var(--red);
+    }
+    
+    .patientReminderButtons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .patientReminderBtns {
+        width: 150px;
+        padding: 10px 12px;
+    }
+    .patientReminderEditBtn, .patientReminderDeleteBtn {
+        font-size: 1.4rem;
+
+    }
+}
+
+@media screen and (max-width: 684px) {
+    
+    .patientReminderTableRowHeader th{
+        padding: 3px 6px;
+        font-size: .8rem;
+        border: 3px solid var(--tan);
+    }
+    
+    .patientReminderTableRowCard td{
+        padding: 3px 6px;
+        font-size: .8rem;
+        border: 3px solid var(--red);
+    }
+}
+
+@media screen and (max-width: 544px) {
+    
+    .patientReminderTableRowHeader th{
+        padding: 3px 5px;
+        font-size: .7rem;
+        border: 2px solid var(--tan);
+    }
+    
+    .patientReminderTableRowCard td{
+        padding: 3px 5px;
+        font-size: .7rem;
+        border: 2px solid var(--red);
+    }
+}
+@media screen and (max-width: 444px) {
+    
+    .patientReminderTableRowHeader th{
+        padding: 2px 4px;
+        font-size: .6rem;
+        border: 2px solid var(--tan);
+    }
+    
+    .patientReminderTableRowCard td{
+        padding: 2px 4px;
+        font-size: .6rem;
+        border: 2px solid var(--red);
+    }
+}

@@ -1,9 +1,9 @@
 import style from './ExistingPatientsCard.module.css'
 import {BsTrash} from 'react-icons/bs'
-import {AiOutlineEdit, AiOutlineShoppingCart} from 'react-icons/ai'
+import {AiOutlineEdit} from 'react-icons/ai'
 // import axios from 'axios';
 
-const existingPatientsCard = () => {
+const existingPatientsCard = ({setShowEditPatient}) => {
   return (
     <>
       <tbody className={style.existingPatientsTableBody}>
@@ -14,20 +14,21 @@ const existingPatientsCard = () => {
           <td>{}</td>
           <td>{}</td>
           <td>{}</td>
+          <td>{}</td>
           <td>
             <span className={style.existingPatientsEditBtn}
               >
                 <AiOutlineEdit
-                // onClick={() => {
-                //   setShowEditProduct(true)
-                //   setProductId(product._id)
-                // }}
+                onClick={() => {
+                  setShowEditPatient(true)
+                  // setPatientId(patient._id)
+                }}
               />
             </span>
           </td>
           <td>
             <span 
-              // onClick={() => handleDelete(product._id)}
+              // onClick={() => handleDelete(patient._id)}
               className={style.existingPatientsDeleteBtn}
               >
                 <BsTrash />

@@ -45,10 +45,10 @@ const Navbar = ({setShowLogin, setShowSignup}) => {
           <li>
             <span
               onClick={() => { 
-                navigate('/'), 
+                navigate('/dashboard-page'), 
                 closeNav()
             }}
-            >Home</span>
+            >Dashboard</span>
           </li>
           <li>
             <span

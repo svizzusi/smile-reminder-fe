@@ -8,6 +8,7 @@ const ExistingPatientsHeader = () => {
         <th>First Name</th>
         <th>Phone Number</th>
         <th>Email</th>
+        <th>Recall Frequency</th>
         <th>Edit Patient</th>
         <th>Delete Patient</th>
       </tr>

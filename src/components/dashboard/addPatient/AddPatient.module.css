@@ -1,0 +1,118 @@
+.addPatientFormSection {
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(5px) saturate(88%);
+    -webkit-backdrop-filter: blur(5px) saturate(88%);
+    background-color: rgba(17, 25, 40, 0.38);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.addPatientFormIconContainer {
+    width: 400px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.addPatientFormIcon {
+    font-size: 3.4rem;
+    color: var(--grayblue);
+    cursor: pointer;
+}
+
+.addPatientFormIcon:hover {
+    color: var(--red);
+}
+
+.addPatientForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: var(--teal);
+    width: 400px;
+    height: fit-content;
+    border-radius: var(--borderRadius);
+    top: 200px;  
+    padding-bottom: 50px;
+}
+
+.addPatientFormImage {
+    width: 100px;
+    padding: 30px 0;
+}
+
+.addPatientFormInputs {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.addPatientInput {
+    width: 350px;
+    padding: 10px 16px;
+    outline: none;
+    border: none;
+    border-radius: var(--borderRadius);
+}
+
+.addPatientSubmit {
+    width: 200px;
+    padding: 10px 16px;
+    outline: none;
+    border: none;
+    border-radius: var(--borderRadius);
+    background: var(--tan);
+    color: black;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.addPatientSubmit:hover {
+    background: var(--red);
+    color: var(--teal);
+}
+
+@media screen and (max-width: 768px) {
+    
+    .addPatientFormIconContainer {
+        width: 300px;
+    }
+    
+    .addPatientFormIcon {
+        font-size: 2.4rem;
+    }
+    
+    .addPatientForm {
+        gap: 10px;
+        width: 300px;
+    }
+    
+    .addPatientFormImage {
+        width: 60px;
+        padding: 20px 0;
+    }
+    
+    .addPatientFormInputs {
+        padding: 6px;
+        gap: 6px;
+    }
+    
+    .addPatientInput {
+        width: 250px;
+        padding: 6px 10px;
+    }
+    
+    .addPatientSubmit {
+        width: 150px;
+        padding: 6px 10px;
+    }
+}
