@@ -1,6 +1,7 @@
 import './App.css'
 import {Routes, Route} from 'react-router-dom'
 import {useState} from 'react'
+import axios from 'axios'
 
 import Navbar from '../src/layout/navbar/Navbar'
 import Footer from '../src/layout/footer/Footer'

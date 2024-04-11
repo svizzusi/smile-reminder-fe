@@ -1,9 +1,9 @@
 import style from './AddPatient.module.css'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri'
 import axios from 'axios'
-// import {addWeeks, startOfWeek, format} from 'date-fns'
+import {addWeeks, startOfWeek, format} from 'date-fns'
 
 const AddPatient = ({setShowAddPatient}) => {
 
@@ -11,7 +11,8 @@ const AddPatient = ({setShowAddPatient}) => {
         lastName: '',
         firstName: '',
         phone: '',
-        email: ''
+        email: '',
+        frequency: ''
     });
 
     function handleClose(e) {
@@ -29,8 +30,13 @@ const AddPatient = ({setShowAddPatient}) => {
         })
     }
 
-    // const currentWeek = format(startOfWeek(new Date(), { weekStartsOn: 0 }), 'y-MM-dd')
-    // const patientReminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), Number(formData.frequency * 4))), 'y-MM-dd')
+    const currentWeek = format(startOfWeek(new Date(), { weekStartsOn: 0 }), 'y-MM-dd')
+    const patientReminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), Number(formData.frequency * 4))), 'y-MM-dd')
+    useEffect(() => {
+        console.log(patientReminderWeek)
+      
+    }, []);
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -42,16 +48,15 @@ const AddPatient = ({setShowAddPatient}) => {
         const frequency = Number(formData.frequency)
     
               try {
-                  const res = await axios.post('', {
+                  const res = await axios.post('http://localhost:3000/patients/createPatient', {
                         lastName,
                         firstName,
                         phone,
                         email,
-                        // patientReminderWeek, 
                         frequency, 
                         originalFrequency: frequency, 
-                        // currentWeek, 
-                        // patientReminderWeek
+                        currentWeek, 
+                        patientReminderWeek
                   })
                   if (res.request.status === 200) {
                       setFormData((prevFormData) => ({
@@ -65,6 +70,7 @@ const AddPatient = ({setShowAddPatient}) => {
                         // fetchData()  
                         setShowAddPatient(false)
                         // toastSuccess('Successfully added patient');
+                        console.log(res)
                   } else {
                     //   toastError('Error adding patient');
                   }  
@@ -136,7 +142,7 @@ const AddPatient = ({setShowAddPatient}) => {
                         required
                         type='text'
                         name='frequency'
-                        placeholder={'Patient Recall Frequency (Weeks)'}
+                        placeholder={'Patient Recall Frequency'}
                         value={formData.frequency}
                         onChange={handleChange}
                     />
