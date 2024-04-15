@@ -23,7 +23,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
   const [id, setId] = useState(window.sessionStorage.getItem('userId'))
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(id ? true : false)
 
   useEffect(() => {
     setUser(id ? true : false)
