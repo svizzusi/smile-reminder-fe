@@ -4,7 +4,7 @@ import {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri';
-import {ToastContext} from '../../App';
+import {ToastContext} from '../../../App';
 
 const Login = ({setShowLogin}) => {
 
@@ -41,11 +41,12 @@ const Login = ({setShowLogin}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const email = formData.email
-    const password = formData.password
+    setLoading(true);
+    const email = formData.email;
+    const password = formData.password;
     try {
-      const res = await axios.post('http://localhost:3000/users/login', {email, password})
-      if(res.data.success === false) {
+      const res = await axios.post('http://localhost:3000/users/login', {email, password});
+      if (res.data.success === false) {
         toastError(res.data.message)
         setFormData((prevFormData) => ({
           ...prevFormData,
@@ -68,7 +69,7 @@ const Login = ({setShowLogin}) => {
       console.error(err);
       setLoading(false);
     }
-  }
+  };
 
 
   return (
