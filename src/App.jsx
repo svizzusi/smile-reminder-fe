@@ -1,7 +1,10 @@
 import './App.css'
 import {Routes, Route} from 'react-router-dom'
-import {useState} from 'react'
+import {useState, createContext} from 'react'
 import axios from 'axios'
+
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from '../src/layout/navbar/Navbar'
 import Footer from '../src/layout/footer/Footer'
@@ -13,23 +16,47 @@ import PrivacyPage from '../src/views/PrivacyPage'
 import TermsPage from '../src/views/TermsPage'
 import ErrorPage from '../src/views/ErrorPage'
 
+export const ToastContext = createContext()
+
 function App() {
 
   const [showLogin, setShowLogin] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
 
+  const toastSuccess = (message) => {
+    toast.success(message);
+  }
+  const toastError = (message) => {
+    toast.error(message);
+  }
+
   return (
     <>
     <Navbar setShowLogin={setShowLogin} setShowSignup={setShowSignup}/>
-    <Routes>
-      <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup}/>} />
-      <Route path='/dashboard-page' element={<DashboardPage />} />
-      <Route path='/existing-patients-page' element={<ExistingPatientsPage />} />
-      <Route path='/about-page' element={<AboutPage />} />
-      <Route path='/privacy-page' element={<PrivacyPage />} />
-      <Route path='/terms-page' element={<TermsPage />} />
-      <Route path='*' element={<ErrorPage />} />
-    </Routes>
+    <ToastContainer 
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        progress={undefined}
+      />
+      <ToastContext.Provider value={{toastSuccess, toastError}}>
+        <Routes>
+          <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup}/>} />
+          <Route path='/dashboard-page' element={<DashboardPage />} />
+          <Route path='/existing-patients-page' element={<ExistingPatientsPage />} />
+          <Route path='/about-page' element={<AboutPage />} />
+          <Route path='/privacy-page' element={<PrivacyPage />} />
+          <Route path='/terms-page' element={<TermsPage />} />
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+      </ToastContext.Provider> 
     <Footer />
     </>
   )

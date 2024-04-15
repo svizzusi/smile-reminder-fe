@@ -1,13 +1,16 @@
 import style from './Signup.module.css';
-// import {useNavigate} from 'react-router-dom';
-import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useState, useContext} from 'react';
 import axios from 'axios';
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri';
+import {ToastContext} from '../../../App'
 
 const Signup = ({setShowSignup}) => {
 
-  // const navigate = useNavigate()
+  const {toastSuccess, toastError} = useContext(ToastContext)
+
+  const navigate = useNavigate()
 
 
   const [formData, setFormData] = useState({
@@ -36,14 +39,45 @@ const Signup = ({setShowSignup}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (formData.password !== formData.confirmPassword) {
+      toastError('Passwords did not match, please retry')
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        password: '',
+        confirmPassword: ''
+      }))
+      return
+    }
+    setLoading(true)
     const name = formData.name
     const email = formData.email
     const password = formData.password
 
     try {
-      const res = await axios.post('URL', {name, email, password});
-      console.log(res)
+      const res = await axios.post('http://localhost:3000/users/signup', {name, email, password});
+      if(res.data.success === false) {
+        toastError(res.data.message)
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          password: '',
+          confirmPassword: ''
+        }))
+      } else {
+        // setUser(true)
+        toastSuccess(res.data.message)
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        }));
+        navigate('/dashboard-page')
+      }
+      setLoading(false)
     } catch (err) {
+      toastError(err.message)
       console.error(err);
       setLoading(false);
     }
@@ -120,7 +154,7 @@ const Signup = ({setShowSignup}) => {
             />
             {formData.confirmPassword !== '' &&
             (formData.password !== formData.confirmPassword && (
-              <span className={style.formDataSpan}>Passwords don't match</span>
+              <span className={style.formDataSpan}>Passwords do not match</span>
             ))}
             <button
               className={style.signupSubmit}

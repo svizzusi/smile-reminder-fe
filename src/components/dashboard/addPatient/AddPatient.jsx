@@ -32,10 +32,6 @@ const AddPatient = ({setShowAddPatient}) => {
 
     const currentWeek = format(startOfWeek(new Date(), { weekStartsOn: 0 }), 'y-MM-dd')
     const patientReminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), Number(formData.frequency * 4))), 'y-MM-dd')
-    useEffect(() => {
-        console.log(patientReminderWeek)
-      
-    }, []);
     
 
     const handleSubmit = async (e) => {
@@ -58,6 +54,7 @@ const AddPatient = ({setShowAddPatient}) => {
                         currentWeek, 
                         patientReminderWeek
                   })
+                  console.log(res)
                   if (res.request.status === 200) {
                       setFormData((prevFormData) => ({
                           ...prevFormData,
