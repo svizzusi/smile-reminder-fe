@@ -1,15 +1,23 @@
 import style from './Login.module.css';
-// import {useNavigate} from 'react-router-dom';
-import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri';
+import {ToastContext} from '../../App';
 
 const Login = ({setShowLogin}) => {
 
-  // const navigate = useNavigate()
+  const {toastSuccess, toastError} = useContext(ToastContext)
 
-  const[formData, SetFormData] = useState({
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    window.sessionStorage.removeItem('userName')
+    window.sessionStorage.removeItem('userId')
+  }, [])
+
+  const[formData, setFormData] = useState({
     email: '',
     password: ''
   })
@@ -23,7 +31,7 @@ const Login = ({setShowLogin}) => {
   }
 
   const handleChange = (e) => {
-    SetFormData(prevFormData => {
+    setFormData(prevFormData => {
       return {
         ...prevFormData,
         [e.target.name]: e.target.value
@@ -36,10 +44,28 @@ const Login = ({setShowLogin}) => {
     const email = formData.email
     const password = formData.password
     try {
-      const res = await axios.post('', {email, password})
-      console.log(res)
+      const res = await axios.post('http://localhost:3000/users/login', {email, password})
+      if(res.data.success === false) {
+        toastError(res.data.message)
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          password: ''
+        }));
+      } else {
+        // setUser(true)
+        toastSuccess(res.data.message)
+        window.sessionStorage.setItem('userName', res.data.userName)
+        window.sessionStorage.setItem('userId', res.data.id)
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          password: ''
+        }));
+        navigate('/dashboard-page');
+      }
+      setLoading(false);
     } catch (err) {
-      console.log(err)
+      toastError(err.message)
+      console.error(err);
       setLoading(false);
     }
   }
