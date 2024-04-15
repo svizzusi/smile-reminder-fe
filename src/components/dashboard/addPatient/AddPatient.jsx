@@ -1,11 +1,21 @@
 import style from './AddPatient.module.css'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri'
 import axios from 'axios'
 import {addWeeks, startOfWeek, format} from 'date-fns'
+import {ToastContext} from '../../../App'
 
 const AddPatient = ({setShowAddPatient}) => {
+
+    const{toastSuccess, toastError} = useContext(ToastContext)
+
+    const [userId, setUserId] = useState('');
+
+    useEffect(() => {
+        const id = window.sessionStorage.getItem('userId')
+        setUserId(id)
+      },[])
 
     const [formData, setFormData] = useState({
         lastName: '',
@@ -51,6 +61,7 @@ const AddPatient = ({setShowAddPatient}) => {
                         email,
                         frequency, 
                         originalFrequency: frequency, 
+                        userId,
                         currentWeek, 
                         patientReminderWeek
                   })
@@ -66,13 +77,13 @@ const AddPatient = ({setShowAddPatient}) => {
                         }))
                         // fetchData()  
                         setShowAddPatient(false)
-                        // toastSuccess('Successfully added patient');
+                        toastSuccess('Successfully added patient');
                         console.log(res)
                   } else {
-                    //   toastError('Error adding patient');
+                      toastError('Error adding patient');
                   }  
               } catch (err) {
-                // toastError(err.message);
+                toastError(err.message);
                   console.error(err)
               }
     }
