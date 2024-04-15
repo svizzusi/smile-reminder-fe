@@ -1,6 +1,6 @@
 import style from './Signup.module.css';
 import {useNavigate} from 'react-router-dom';
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import axios from 'axios';
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri';
@@ -12,6 +12,10 @@ const Signup = ({setShowSignup}) => {
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    window.sessionStorage.removeItem('userName')
+    window.sessionStorage.removeItem('userId')
+  }, [])
 
   const [formData, setFormData] = useState({
     name: '',
@@ -65,6 +69,8 @@ const Signup = ({setShowSignup}) => {
         }))
       } else {
         // setUser(true)
+        window.sessionStorage.setItem('userName', res.data.userName)
+        window.sessionStorage.setItem('userId', res.data.id)
         toastSuccess(res.data.message)
         setFormData((prevFormData) => ({
           ...prevFormData,
