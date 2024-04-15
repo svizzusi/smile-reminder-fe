@@ -6,7 +6,7 @@ import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri';
 import {ToastContext} from '../../../App'
 
-const Signup = ({setShowSignup}) => {
+const Signup = ({setShowSignup, setId}) => {
 
   const {toastSuccess, toastError} = useContext(ToastContext)
 
@@ -68,9 +68,9 @@ const Signup = ({setShowSignup}) => {
           confirmPassword: ''
         }))
       } else {
-        // setUser(true)
         window.sessionStorage.setItem('userName', res.data.userName)
         window.sessionStorage.setItem('userId', res.data.id)
+        setId(window.sessionStorage.getItem('userId'))
         toastSuccess(res.data.message)
         setFormData((prevFormData) => ({
           ...prevFormData,

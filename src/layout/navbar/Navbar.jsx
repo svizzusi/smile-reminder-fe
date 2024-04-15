@@ -3,7 +3,7 @@ import style from './Navbar.module.css'
 import { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
-const Navbar = ({setShowLogin, setShowSignup}) => {
+const Navbar = ({setShowLogin, setShowSignup, user, setId}) => {
   const [navExpanded, setNavExpanded] = useState(false)
     const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ const Navbar = ({setShowLogin, setShowSignup}) => {
           />
         </Link>
         <ul className={navExpanded ? `${style.navLinks} ${style.expanded}` : style.navLinks}>
-          <li>
+          {!user && <li>
             <span
               onClick={() => { 
                   setShowLogin(true), 
@@ -32,8 +32,8 @@ const Navbar = ({setShowLogin, setShowSignup}) => {
                   closeNav() 
                 }}
             >Login</span>
-          </li>
-          <li>
+          </li>}
+          {!user && <li>
             <span
               onClick={() => { 
                 setShowSignup(true), 
@@ -41,28 +41,28 @@ const Navbar = ({setShowLogin, setShowSignup}) => {
                 closeNav() 
               }}
             >SignUp</span>
-          </li>
-          <li>
+          </li>}
+          {user && <li>
             <span
               onClick={() => { 
                 navigate('/dashboard-page'), 
                 closeNav()
             }}
             >Dashboard</span>
-          </li>
-          <li>
+          </li>}
+          {user && <li>
             <span
               onClick={() => { 
                 setShowSignup(false), 
                 setShowLogin(false),
-                // setUser(false),
-                // window.sessionStorage.removeItem('userName');, // Clear user name
-                // window.sessionStorage.removeItem('userId');, // Clear user ID
+                window.sessionStorage.removeItem('userName'), // Clear user name
+                window.sessionStorage.removeItem('userId'), // Clear user ID
+                setId(window.sessionStorage.getItem('userId')),
                 closeNav(),
                 navigate('/')
             }}
             >Logout</span>
-          </li>
+          </li>}
         </ul>
         <div 
             className={navExpanded ? `${style['icon-three']} ${style['active-three']}` : style['icon-three']}

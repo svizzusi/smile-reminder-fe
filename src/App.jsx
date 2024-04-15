@@ -1,6 +1,6 @@
 import './App.css'
 import {Routes, Route} from 'react-router-dom'
-import {useState, createContext} from 'react'
+import {useState, createContext, useEffect} from 'react'
 import axios from 'axios'
 
 import {ToastContainer, toast} from 'react-toastify';
@@ -22,6 +22,13 @@ function App() {
 
   const [showLogin, setShowLogin] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
+  const [id, setId] = useState(window.sessionStorage.getItem('userId'))
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(id ? true : false)
+  }, [id]);
+  
 
   const toastSuccess = (message) => {
     toast.success(message);
@@ -32,7 +39,7 @@ function App() {
 
   return (
     <>
-    <Navbar setShowLogin={setShowLogin} setShowSignup={setShowSignup}/>
+    <Navbar setShowLogin={setShowLogin} setShowSignup={setShowSignup} user={user} setId={setId}/>
     <ToastContainer 
         position="top-center"
         autoClose={5000}
@@ -48,7 +55,7 @@ function App() {
       />
       <ToastContext.Provider value={{toastSuccess, toastError}}>
         <Routes>
-          <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup}/>} />
+          <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup} setId={setId}/>} />
           <Route path='/dashboard-page' element={<DashboardPage />} />
           <Route path='/existing-patients-page' element={<ExistingPatientsPage />} />
           <Route path='/about-page' element={<AboutPage />} />
