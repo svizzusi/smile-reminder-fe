@@ -22,6 +22,7 @@ function App() {
 
   const [showLogin, setShowLogin] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
+  // const [patients, setPatients] = useState([])
   const [id, setId] = useState(window.sessionStorage.getItem('userId'))
   const [user, setUser] = useState(id ? true : false)
 
@@ -36,6 +37,16 @@ function App() {
   const toastError = (message) => {
     toast.error(message);
   }
+
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get(`http://localhost:3000/patients/getPatients/${id}`)
+  //     console.log(res)
+  //     setPatients(res.data)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   return (
     <>

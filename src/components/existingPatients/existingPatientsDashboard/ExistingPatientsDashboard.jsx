@@ -4,13 +4,23 @@ import  ExistingPatientsSearch from '../existingPatientsSearch/ExistingPatientsS
 import ExistingPatients from '../existingPatients/ExistingPatients'
 import EditPatient from '../../dashboard/editPatient/EditPatient'
 
-import {useState} from 'react'
-// import {useNavigate} from 'react-router-dom'
+import {useState, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const ExistingPatientsDashboard = () => {
 
   const [showEditPatient, setShowEditPatient] = useState(false)
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
+
+  // Fetch UserName from the server on component mount
+  useEffect(() => {
+    const userName = window.sessionStorage.getItem('userName')
+    if (!userName) {
+      navigate('/')
+    } else {
+    console.log("UserName from sessionStorage:", userName);
+    };
+  }, [])
 
   return (
     <>

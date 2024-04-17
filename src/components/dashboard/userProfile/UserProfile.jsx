@@ -7,11 +7,24 @@ import PatientReminder from '../patientRemider/PatientReminder'
 import AddPatient from '../addPatient/AddPatient';
 import EditPatient from '../editPatient/EditPatient';
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 // import axios from 'axios'
 
 const UserProfile = () => {
+
+  const navigate = useNavigate()
+
+   // Fetch UserName from the server on component mount
+   useEffect(() => {
+      const userName = window.sessionStorage.getItem('userName')
+      if (!userName) {
+        navigate('/')
+      } else {
+      console.log("UserName from sessionStorage:", userName);
+      }
+    }, [])
 
   const [showAddPatient, setShowAddPatient] = useState(false)
   const [showEditPatient, setShowEditPatient] = useState(false)
