@@ -11,6 +11,7 @@ const AddPatient = ({setShowAddPatient}) => {
     const{toastSuccess, toastError} = useContext(ToastContext)
 
     const [userId, setUserId] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
     useEffect(() => {
         const id = window.sessionStorage.getItem('userId')
@@ -38,7 +39,19 @@ const AddPatient = ({setShowAddPatient}) => {
                 [e.target.name]: e.target.value,
             }
         })
+        if (e.target.name === 'phone') {
+            if (e.target.value.length !== 10) {
+                setPhoneError('Please enter a 10-digit phone number');
+            } else {
+                setPhoneError('');
+            }
+        }
     }
+
+    // Function to check if phone number is valid
+    const isPhoneValid = () => {
+        return formData.phone.length === 10;
+    };
 
     const currentWeek = format(startOfWeek(new Date(), { weekStartsOn: 0 }), 'y-MM-dd')
     const patientReminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), Number(formData.frequency * 4))), 'y-MM-dd')
@@ -46,6 +59,10 @@ const AddPatient = ({setShowAddPatient}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (!isPhoneValid()) {
+            toastError('Please enter a 10-digit phone number.');
+            return;
+        }
     
         const lastName = formData.lastName
         const firstName = formData.firstName
@@ -136,6 +153,7 @@ const AddPatient = ({setShowAddPatient}) => {
                         value={formData.phone}
                         onChange={handleChange}
                     />
+                    {phoneError && <span className={style.errorMessage}>{phoneError}</span>}
                     <input
                         className={style.addPatientInput}
                         required
@@ -161,7 +179,8 @@ const AddPatient = ({setShowAddPatient}) => {
                             !formData.firstName ||
                             !formData.phone ||
                             !formData.email ||
-                            !formData.frequency
+                            !formData.frequency ||
+                            !isPhoneValid()
                         }
                         type='submit'
                         value='Add Patient'
