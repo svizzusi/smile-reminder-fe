@@ -7,20 +7,20 @@ import PatientReminder from '../patientRemider/PatientReminder'
 import AddPatient from '../addPatient/AddPatient';
 import EditPatient from '../editPatient/EditPatient';
 
+import axios from 'axios'
+
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import axios from 'axios'
 
-const UserProfile = ({setPatientId, patientId}) => {
+const UserProfile = ({patientId, setPatientId}) => {
 
   const navigate = useNavigate()
-  
-  // State to store the Products
-  const [patients, setPatients] = useState([]);
 
-   // State to store the User id
-   const [userId, setUserId] = useState(window.sessionStorage.getItem('userId'));
+  const [showAddPatient, setShowAddPatient] = useState(false)
+  const [showEditPatient, setShowEditPatient] = useState(false)
+  const [patients, setPatients] = useState([]); // State to store the Products
+  const [userId, setUserId] = useState(window.sessionStorage.getItem('userId')); // State to store the User id
 
    // Fetch UserName from the server on component mount
    useEffect(() => {
@@ -34,21 +34,18 @@ const UserProfile = ({setPatientId, patientId}) => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/patients/getProducts/${userId}`);
-        // console.log(res.data);
-        setProducts(res.data);
+        const res = await axios.get(`http://localhost:3000/patients/getPatients/${userId}`);
+        console.log(res.data);
+        setPatients(res.data);
       } catch (err) {
         console.log(err);
       }
     };
 
-  const [showAddPatient, setShowAddPatient] = useState(false)
-  const [showEditPatient, setShowEditPatient] = useState(false)
-
   return (
     <section className={style.userProfileSection}>
-      {showAddPatient && <AddPatient setShowAddPatient={setShowAddPatient}/> }
-      {showEditPatient && <EditPatient setShowEditPatient={setShowEditPatient} setPatientId={setPatientId} patientId={patientId}/>}
+      {showAddPatient && <AddPatient setShowAddPatient={setShowAddPatient} fetchData={fetchData}/> }
+      {showEditPatient && <EditPatient setShowEditPatient={setShowEditPatient} setPatientId={setPatientId} patientId={patientId} fetchData={fetchData}/>}
       <div className={style.userProfileTopSection}>
         <UserProfileWelcome />
         <div className={style.userProfileButtons}>

@@ -6,12 +6,12 @@ import axios from 'axios'
 import {addWeeks, startOfWeek, parseISO, format} from 'date-fns'
 import {ToastContext} from '../../../App';
 
-const EditPatient = ({setShowEditPatient, patientId}) => {
+const EditPatient = ({setShowEditPatient, patientId, fetchData}) => {
 
     const {toastSuccess, toastError} = useContext(ToastContext)
 
-    const [patients, setPatients] = useState([]); // State to store the Products
-    const [id, setId] = useState(window.sessionStorage.getItem('userId')) // State to store the User id
+    // const [patients, setPatients] = useState([]); // State to store the Products
+    // const [id, setId] = useState(window.sessionStorage.getItem('userId')) // State to store the User id
 
     const [formData, setFormData] = useState({
         lastName: '',
@@ -21,23 +21,24 @@ const EditPatient = ({setShowEditPatient, patientId}) => {
         frequency: ''
     });
 
-    const fetchData = async () => {
-        try {
-            const res = await axios.get(`http://localhost:3000/patients/getPatients/${id}`)
-            console.log(res)
-            setPatients(res.data);
-        } catch (err) {
-            console.log(err);
-        }
-      };
+    // const fetchData = async () => {
+    //     try {
+    //         const res = await axios.get(`http://localhost:3000/patients/getPatients/${id}`)
+    //         console.log(res)
+    //         setPatients(res.data);
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    //   };
     
       useEffect(() => {
         fetchData()
       }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/patients/getPatient/${patientId}`)
-          .then(res => {
+      const getPatient = async () => {
+        try {
+            const res = await axios.get(`http://localhost:3000/patients/getPatient/${patientId}`);
             console.log('API response:', res.data);
             setFormData(prevFormData => ({
               ...prevFormData,
@@ -48,9 +49,12 @@ const EditPatient = ({setShowEditPatient, patientId}) => {
               frequency: res.data.frequency,
               currentWeek: res.data.currentWeek
             }));
-          })
-          .catch(err => console.error('API request failed:', err));
-      }, [patientId]);
+          } catch (error) {
+            console.error(error)
+          }
+      }
+      getPatient()
+    }, [patientId]);
     
         function handleClose(e) {
             if (e.target.id === 'modalBackgroundGlass') {

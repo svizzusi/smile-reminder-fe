@@ -2,36 +2,37 @@ import style from './PatientReminder.module.css'
 import {BsTrash} from 'react-icons/bs';
 import {AiOutlineEdit} from 'react-icons/ai';
 import axios from 'axios';
-import {useState, useEffect, useContext} from 'react';
+import { useEffect, useContext} from 'react';
 import {addWeeks, startOfWeek, format} from 'date-fns'
 import {ToastContext} from '../../../App';
 
 const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPatients, fetchData}) => {
 
   const {toastSuccess, toastError} = useContext(ToastContext)
-  const [patientRefresh, setPatientRefresh] = useState(false)
-  const [id, setId] = useState(window.sessionStorage.getItem('userId')) // State to store the User id
 
    // Fetch patients from the server on component mount
    useEffect(() => {
     fetchData();
+    console.log(patients)
 }, []);
 
-  // const [clickedItemIndex, setClickedItemIndex] = useState(null);
-
-  const handleDelete = async (id) => {
+  const handleDelete = async (patientId) => {
     try {
-      await axios.delete(`http://localhost:3000/patients/deletePatient/${id}`)
+      await axios.delete(`http://localhost:3000/patients/deletePatient/${patientId}`)
         .then(() => {
-          // Remove the deleted patient from the local state
-          setPatients((prevPatients) => prevPatients.filter((patient) => patient._id !== id));
-          toastSuccess('Successfully deleted patient');
+            // Remove the deleted patient from the local state
+            setPatients((prevPatients) => prevPatients.filter((patient) => patient._id !== patientId));
+            toastSuccess('Patient deleted successfully')
         })
     } catch (err) {
       toastError(err.message)
-      console.log(err)
+      console.error(err)
     }
   };
+
+
+    // const [clickedItemIndex, setClickedItemIndex] = useState(null);
+
 
   // const changeBackground = (index) => {
   //   setClickedItemIndex(index);
@@ -52,7 +53,12 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
   //   }
   // };
 
-  const reminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), 1)), 'y-MM-dd')
+  const reminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), 4)), 'y-MM-dd')
+
+  useEffect(() => {
+    console.log(reminderWeek)
+  }, []);
+  
 
   return (
     <tbody className={style.patientReminderTableBody}>
@@ -60,7 +66,7 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
         return (
           <tr
             className={style.patientReminderTableRowCard}
-          key={patient._id}>
+            key={patient._id}>
             {/* <td>{index +1}</td> */}
             <td>{patient.firstName}</td>
             <td>{patient.lastName}</td>
@@ -85,13 +91,14 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
                 ><AiOutlineEdit
                   onClick={() => {
                     setShowEditPatient(true);
+                    setPatientId(patient._id)
                   }}
                 />
               </span>
             </td>
             <td>
               <span
-                onClick={() => handleDelete()}
+                onClick={() => handleDelete(patient._id)}
                 className={style.patientReminderDeleteBtn}
                 ><BsTrash />
               </span>

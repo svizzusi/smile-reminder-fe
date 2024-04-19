@@ -6,7 +6,7 @@ import axios from 'axios'
 import {addWeeks, startOfWeek, format} from 'date-fns'
 import {ToastContext} from '../../../App'
 
-const AddPatient = ({setShowAddPatient}) => {
+const AddPatient = ({setShowAddPatient, fetchData}) => {
 
     const{toastSuccess, toastError} = useContext(ToastContext)
 
@@ -25,6 +25,10 @@ const AddPatient = ({setShowAddPatient}) => {
         email: '',
         frequency: ''
     });
+
+    useEffect(() => {
+        fetchData()
+      }, []);
 
     function handleClose(e) {
         if (e.target.id === 'modalBackgroundGlass') {
@@ -92,7 +96,7 @@ const AddPatient = ({setShowAddPatient}) => {
                           email: '',
                           frequency: 0
                         }))
-                        // fetchData()  
+                        fetchData()  
                         setShowAddPatient(false)
                         toastSuccess('Successfully added patient');
                         console.log(res)

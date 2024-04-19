@@ -1,4 +1,4 @@
-import {useContext, useState, useEffect} from 'react'
+import {useContext, useEffect} from 'react'
 
 import style from './ExistingPatientsCard.module.css'
 import {BsTrash} from 'react-icons/bs'
@@ -7,22 +7,9 @@ import {AiOutlineEdit} from 'react-icons/ai'
 import axios from 'axios';
 import {ToastContext} from '../../../App';
 
-const existingPatientsCard = ({setShowEditPatient, setPatientId}) => {
+const ExistingPatientsCard = ({setShowEditPatient, setPatientId, patients, setPatients, fetchData}) => {
 
   const {toastSuccess, toastError} = useContext(ToastContext)
-
-  const [patients, setPatients] = useState([]); // State to store the Products
-  const [id, setId] = useState(window.sessionStorage.getItem('userId')) // State to store the User id
-
-  const fetchData = async () => {
-    try {
-        const res = await axios.get(`http://localhost:3000/patients/getPatients/${id}`)
-        console.log(res)
-        setPatients(res.data);
-    } catch (err) {
-        console.log(err);
-    }
-  };
 
   useEffect(() => {
     fetchData()
@@ -88,4 +75,4 @@ const existingPatientsCard = ({setShowEditPatient, setPatientId}) => {
   )
 };
 
-export default existingPatientsCard;
+export default ExistingPatientsCard;
