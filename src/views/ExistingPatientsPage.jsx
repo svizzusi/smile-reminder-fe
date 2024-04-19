@@ -1,13 +1,13 @@
 import ExistingPatientsDashboard from "../components/existingPatients/existingPatientsDashboard/ExistingPatientsDashboard";
 
 
-const ExistingPatients = () => { 
+const ExistingPatientsPage = ({setId, patientId, setPatientId}) => { 
 
   return (
     <>
-      <ExistingPatientsDashboard />
+      <ExistingPatientsDashboard setId={setId} patientId={patientId} setPatientId={setPatientId}/>
     </>
   )
 };
 
-export default ExistingPatients;
+export default ExistingPatientsPage;

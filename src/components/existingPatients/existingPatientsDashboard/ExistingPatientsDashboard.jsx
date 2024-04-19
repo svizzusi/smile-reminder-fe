@@ -7,7 +7,7 @@ import EditPatient from '../../dashboard/editPatient/EditPatient'
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-const ExistingPatientsDashboard = () => {
+const ExistingPatientsDashboard = ({patientId, setPatientId}) => {
 
   const [showEditPatient, setShowEditPatient] = useState(false)
   const navigate = useNavigate()
@@ -24,13 +24,13 @@ const ExistingPatientsDashboard = () => {
 
   return (
     <>
-    {showEditPatient && <EditPatient setShowEditPatient={setShowEditPatient} />}
+    {showEditPatient && <EditPatient setShowEditPatient={setShowEditPatient} patientId={patientId} setPatientId={setPatientId}/>}
       <section className={style.existingPatientsDashboardSection}>
         <section className={style.existingPatientsSearchSection}>
           <ExistingPatientsSearch />
         </section>
         <section className={style.existingPatients}>
-          <ExistingPatients setShowEditPatient={setShowEditPatient}/>
+          <ExistingPatients setShowEditPatient={setShowEditPatient} setPatientId={setPatientId} />
         </section>
       </section>
     </>

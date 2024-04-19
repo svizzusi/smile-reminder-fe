@@ -1,11 +1,17 @@
 import style from './EditPatient.module.css'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import logo from '../../../assets/images/logo.webp';
 import {RiCloseCircleFill} from 'react-icons/ri'
 import axios from 'axios'
-// import {addWeeks, startOfWeek, parseISO, format} from 'date-fns'
+import {addWeeks, startOfWeek, parseISO, format} from 'date-fns'
+import {ToastContext} from '../../../App';
 
-const EditPatient = ({setShowEditPatient}) => {
+const EditPatient = ({setShowEditPatient, patientId}) => {
+
+    const {toastSuccess, toastError} = useContext(ToastContext)
+
+    const [patients, setPatients] = useState([]); // State to store the Products
+    const [id, setId] = useState(window.sessionStorage.getItem('userId')) // State to store the User id
 
     const [formData, setFormData] = useState({
         lastName: '',
@@ -15,8 +21,22 @@ const EditPatient = ({setShowEditPatient}) => {
         frequency: ''
     });
 
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`http://localhost:3000/patients/getPatients/${id}`)
+            console.log(res)
+            setPatients(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+      };
+    
+      useEffect(() => {
+        fetchData()
+      }, []);
+
     useEffect(() => {
-        axios.get(``)
+        axios.get(`http://localhost:3000/patients/getPatient/${patientId}`)
           .then(res => {
             console.log('API response:', res.data);
             setFormData(prevFormData => ({
@@ -30,7 +50,7 @@ const EditPatient = ({setShowEditPatient}) => {
             }));
           })
           .catch(err => console.error('API request failed:', err));
-      }, []);
+      }, [patientId]);
     
         function handleClose(e) {
             if (e.target.id === 'modalBackgroundGlass') {
@@ -39,40 +59,39 @@ const EditPatient = ({setShowEditPatient}) => {
         }
     
         function handleChange(e) {
-            const {name, value} = e.target;
-            setFormData(prevFormData => {
-                return {
-                    ...prevFormData,
-                    [e.target.name]: e.target.value,
-                }
-            })
+            const { name, value } = e.target;
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [name]: value,
+            }));
         }
+        
 
         const handleUpdate = async (e) => {
             e.preventDefault()
-            // const parsedDate = parseISO(formData.currentWeek);
-            // const patientReminderDay = format(startOfWeek(addWeeks(parsedDate, Number(formData.frequency * 4))), 'y-MM-dd')
+            const parsedDate = parseISO(formData.currentWeek);
+            const patientReminderDay = format(startOfWeek(addWeeks(parsedDate, Number(formData.frequency * 4))), 'y-MM-dd')
             const lastName = formData.lastName
             const firstName = formData.firstName
             const phone = formData.phone
             const email = formData.email
             const frequency = formData.frequency
-            // const patientReminderWeek = patientReminderDay
+            const patientReminderWeek = patientReminderDay
         try {
-            const res = await axios.put(``, {
+            const res = await axios.put(`http://localhost:3000/patients/updatePatient/${patientId}`, {
                     lastName,
                     firstName,
                     phone,
                     email,
                     frequency,
-                    // patientReminderWeek
+                    patientReminderWeek
                 })
                 console.log(res)
-            // toastSuccess('Successfully edited patient')
+            toastSuccess('Successfully edited patient')
             setShowEditPatient(false);
-            // fetchData() 
+            fetchData() 
         } catch (err) {
-            // toastError(err.message)
+            toastError(err.message)
             console.error(err)
         }
     }

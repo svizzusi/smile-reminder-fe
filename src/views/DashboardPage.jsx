@@ -1,11 +1,11 @@
 import UserProfile from "../components/dashboard/userProfile/UserProfile";
 
-const Dashboard = () => {
+const DashboardPage = ({setPatientId, patientId}) => {
   return (
     <>
-      <UserProfile />
+      <UserProfile patientId={patientId} setPatientId={setPatientId} />
     </>
   )
 };
 
-export default Dashboard;
+export default DashboardPage;

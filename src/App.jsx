@@ -22,7 +22,8 @@ function App() {
 
   const [showLogin, setShowLogin] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
-  // const [patients, setPatients] = useState([])
+  const [patientId, setPatientId] = useState()
+  const [patients, setPatients] = useState([])
   const [id, setId] = useState(window.sessionStorage.getItem('userId'))
   const [user, setUser] = useState(id ? true : false)
 
@@ -67,8 +68,8 @@ function App() {
       <ToastContext.Provider value={{toastSuccess, toastError}}>
         <Routes>
           <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup} setId={setId}/>} />
-          <Route path='/dashboard-page' element={<DashboardPage />} />
-          <Route path='/existing-patients-page' element={<ExistingPatientsPage />} />
+          <Route path='/dashboard-page' element={<DashboardPage setId={setId} patientId={patientId} setPatientId={setPatientId} />} />
+          <Route path='/existing-patients-page' element={<ExistingPatientsPage setId={setId} patientId={patientId} setPatientId={setPatientId}/>} />
           <Route path='/about-page' element={<AboutPage />} />
           <Route path='/privacy-page' element={<PrivacyPage />} />
           <Route path='/terms-page' element={<TermsPage />} />

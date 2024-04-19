@@ -7,7 +7,7 @@ import {AiOutlineEdit} from 'react-icons/ai'
 import axios from 'axios';
 import {ToastContext} from '../../../App';
 
-const existingPatientsCard = ({setShowEditPatient}) => {
+const existingPatientsCard = ({setShowEditPatient, setPatientId}) => {
 
   const {toastSuccess, toastError} = useContext(ToastContext)
 
@@ -26,14 +26,27 @@ const existingPatientsCard = ({setShowEditPatient}) => {
 
   useEffect(() => {
     fetchData()
-    console.log(id)
     console.log(patients)
   }, []);
+
+  const handleDelete = async (patientId) => {
+    try {
+      await axios.delete(`http://localhost:3000/patients/deletePatient/${patientId}`)
+        .then(() => {
+            // Remove the deleted patient from the local state
+            setPatients((prevPatients) => prevPatients.filter((patient) => patient._id !== patientId));
+            toastSuccess('Patient deleted successfully')
+        })
+    } catch (err) {
+      toastError(err.message)
+      console.error(err)
+    }
+  };
 
   return (
     <>
       <tbody className={style.existingPatientsTableBody}>
-        {patients.map((patient, index) => {
+        {patients.map((patient) => {
           return (
             <tr 
               className={style.existingPatientsTableRowCard} 
@@ -45,22 +58,20 @@ const existingPatientsCard = ({setShowEditPatient}) => {
               <td>{patient.email}</td>
               <td>{patient.frequency}</td>
               <td>
-                <span className={style.existingPatientsEditBtn}
-                  >
+                <span className={style.existingPatientsEditBtn}>
                     <AiOutlineEdit
                     onClick={() => {
                       setShowEditPatient(true)
-                      // setPatientId(patient._id)
+                      setPatientId(patient._id)
                     }}
                   />
                 </span>
               </td>
               <td>
                 <span 
-                  // onClick={() => handleDelete(patient._id)}
+                  onClick={() => handleDelete(patient._id)}
                   className={style.existingPatientsDeleteBtn}
-                  >
-                    <BsTrash />
+                  ><BsTrash />
                 </span>
               </td>
             </tr>
