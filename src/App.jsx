@@ -2,6 +2,7 @@ import './App.css'
 import {Routes, Route} from 'react-router-dom'
 import {useState, createContext, useEffect} from 'react'
 import axios from 'axios'
+import {Tooltip} from 'react-tooltip'
 
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -65,6 +66,7 @@ function App() {
         theme="dark"
         progress={undefined}
       />
+      <Tooltip id="my-tooltip" />
       <ToastContext.Provider value={{toastSuccess, toastError}}>
         <Routes>
           <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup} setId={setId}/>} />

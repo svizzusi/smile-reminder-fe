@@ -2,7 +2,7 @@ import style from './PatientReminder.module.css'
 import {BsTrash} from 'react-icons/bs';
 import {AiOutlineEdit} from 'react-icons/ai';
 import axios from 'axios';
-import { useEffect, useContext} from 'react';
+import { useEffect, useContext, useState} from 'react';
 import {addWeeks, startOfWeek, format} from 'date-fns'
 import {ToastContext} from '../../../App';
 
@@ -31,27 +31,27 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
   };
 
 
-    // const [clickedItemIndex, setClickedItemIndex] = useState(null);
+  const [clickedItemIndex, setClickedItemIndex] = useState(null);
 
 
-  // const changeBackground = (index) => {
-  //   setClickedItemIndex(index);
-  // };
+  const changeBackground = (index) => {
+    setClickedItemIndex(index);
+  };
 
-  // const copyToClipboard = (patientID) => {
-  //   try {
-  //     navigator.clipboard.writeText(patientID)
-  //       .then(() => {
-  //         // toastSuccess('Successfully coppied patient ID to clipboard')
-  //       })
-  //       .catch((err) => {
-  //         console.error('Clipboard writeText failed:', err);
-  //         // toastError(err.message)
-  //       });
-  //   } catch (err) {
-  //     console.error('Clipboard API not supported:', err);
-  //   }
-  // };
+  const copyToClipboard = (email) => {
+    try {
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          toastSuccess('Successfully coppied patient Email to clipboard')
+        })
+        .catch((err) => {
+          console.error('Clipboard writeText failed:', err);
+          toastError(err.message)
+        });
+    } catch (err) {
+      console.error('Clipboard API not supported:', err);
+    }
+  };
 
   const reminderWeek = format(startOfWeek(addWeeks(startOfWeek(new Date(), { weekStartsOn: 0 }), 4)), 'y-MM-dd')
 
@@ -62,7 +62,7 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
 
   return (
     <tbody className={style.patientReminderTableBody}>
-      {patients.filter(patient => patient.frequency !== 0 && reminderWeek === patient.patientReminderWeek).map((patient) => {
+      {patients.filter(patient => patient.frequency !== 0 && reminderWeek === patient.patientReminderWeek).map((patient, index) => {
         return (
           <tr
             className={style.patientReminderTableRowCard}
@@ -72,17 +72,17 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
             <td>{patient.lastName}</td>
             <td>{patient.phone}</td>
             <td
-              // onClick={() => {
-              //   copyToClipboard(patient.patientId)
-              //   changeBackground(index)
-              // }
-              // }
-              // data-tooltip-id="my-tooltip" 
-              // data-tooltip-content="Click to copy"
-              // style={{
-              //   backgroundColor:
-              //     index === clickedItemIndex ? 'var(--tan)' : 'null', // Change background color conditionally
-              // }}
+              onClick={() => {
+                copyToClipboard(patient.email)
+                changeBackground(index)
+              }
+              }
+              data-tooltip-id="my-tooltip" 
+              data-tooltip-content="Click to copy"
+              style={{
+                backgroundColor:
+                  index === clickedItemIndex ? 'var(--tan)' : 'null', // Change background color conditionally
+              }}
               >{patient.email}
             </td>
             <td>{patient.frequency}</td>
