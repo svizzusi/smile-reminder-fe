@@ -43,7 +43,7 @@ const ExistingPatientsDashboard = ({patientId, setPatientId}) => {
     {showEditPatient && <EditPatient setShowEditPatient={setShowEditPatient} patientId={patientId} setPatientId={setPatientId} fetchData={fetchData}/>}
       <section className={style.existingPatientsDashboardSection}>
         <section className={style.existingPatientsSearchSection}>
-          <ExistingPatientsSearch />
+          <ExistingPatientsSearch patients={patients} setPatients={setPatients} showEditPatient={showEditPatient} setPatientId={setPatientId}/>
         </section>
         <section className={style.existingPatients}>
           <ExistingPatients setShowEditPatient={setShowEditPatient} setPatientId={setPatientId} patients={patients} setPatients={setPatients} fetchData={fetchData}/>
