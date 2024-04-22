@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../src/layout/navbar/Navbar'
 import Footer from '../src/layout/footer/Footer'
 import HomePage from '../src/views/HomePage'
-import DashboardPage from '../src/views/DashboardPage'
+import DashboardSR from './views/DashboardSR'
 import ExistingPatientsPage from '../src/views/ExistingPatientsPage'
 import AboutPage from '../src/views/AboutPage'
 import PrivacyPage from '../src/views/PrivacyPage'
@@ -70,7 +70,7 @@ function App() {
       <ToastContext.Provider value={{toastSuccess, toastError}}>
         <Routes>
           <Route path='/' element={<HomePage showLogin={showLogin} setShowLogin={setShowLogin} showSignup={showSignup} setShowSignup={setShowSignup} setId={setId}/>} />
-          <Route path='/dashboard-page' element={<DashboardPage setId={setId} patientId={patientId} setPatientId={setPatientId} />} />
+          <Route path='/dashboard-SR' element={<DashboardSR setId={setId} patientId={patientId} setPatientId={setPatientId} />} />
           <Route path='/existing-patients-page' element={<ExistingPatientsPage setId={setId} patientId={patientId} setPatientId={setPatientId}/>} />
           <Route path='/about-page' element={<AboutPage />} />
           <Route path='/privacy-page' element={<PrivacyPage />} />

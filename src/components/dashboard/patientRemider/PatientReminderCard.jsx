@@ -63,6 +63,7 @@ const PatientReminderCard = ({setShowEditPatient, setPatientId, patients, setPat
   return (
     <tbody className={style.patientReminderTableBody}>
       {patients.filter(patient => patient.frequency !== 0 && reminderWeek === patient.patientReminderWeek).map((patient, index) => {
+      {/* {patients.map((patient, index) => { */}
         return (
           <tr
             className={style.patientReminderTableRowCard}

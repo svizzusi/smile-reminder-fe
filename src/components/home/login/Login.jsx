@@ -61,7 +61,7 @@ const Login = ({setShowLogin, setId}) => {
           ...prevFormData,
           password: ''
         }));
-        navigate('/dashboard-page');
+        navigate('/dashboard-SR');
       }
       setLoading(false);
     } catch (err) {

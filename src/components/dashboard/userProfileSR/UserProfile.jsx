@@ -1,6 +1,6 @@
 import style from './UserProfile.module.css'
 
-import UserProfileWelcome from "../userProfile/userProfileWelcome/UserProfileWelcome";
+import UserProfileWelcome from "./userProfileWelcome/UserProfileWelcome";
 import UserPatientExistingPatientsBtn from './userProfileBtns/UserProfileExistingPatientBtn'
 import UserPatientCreatePatientBtn from './userProfileBtns/UserProfileCreatePatientBtn'
 import PatientReminder from '../patientRemider/PatientReminder'
